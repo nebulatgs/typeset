@@ -53,7 +53,6 @@
 	}
 	:global(.rendered p) {
 		@apply indent-12;
-		@apply text-lg;
 		@apply mb-3;
 		@apply font-notoserif;
 	}
