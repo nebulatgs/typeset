@@ -2,18 +2,17 @@
 	import { Editor } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
 	import { onDestroy, onMount } from 'svelte';
-	import { Markdown } from './extensions/Markdown';
+	import { MarkdownHeading } from './extensions/MarkdownHeading';
+	import { MarkdownStyling } from './extensions/MarkdownStyling';
 
 	let element: HTMLDivElement;
 	let editor: Editor;
 	export let html = '';
 
-	function renderDecorations(element: HTMLDivElement, editor: Editor) {}
-
 	onMount(() => {
 		editor = new Editor({
 			element: element,
-			extensions: [StarterKit, Markdown],
+			extensions: [StarterKit, MarkdownHeading, MarkdownStyling],
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
 				editor = editor;

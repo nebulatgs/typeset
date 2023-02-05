@@ -2,14 +2,14 @@ import { Extension } from '@tiptap/core';
 import { Plugin } from '@tiptap/pm/state';
 import { Decoration, DecorationSet } from '@tiptap/pm/view';
 
-export const Markdown = Extension.create({
-	name: 'markdown',
+export const MarkdownHeading = Extension.create({
+	name: 'markdownheading',
 
 	addProseMirrorPlugins() {
 		return [
 			new Plugin({
 				props: {
-					decorations: ({ doc, selection }) => {
+					decorations: ({ doc }) => {
 						const decorations: Decoration[] = [];
 
 						doc.descendants((node, pos) => {
