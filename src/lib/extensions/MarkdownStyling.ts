@@ -20,24 +20,34 @@ export const MarkdownStyling = Extension.create({
 						const decorations: Decoration[] = [];
 
 						doc.descendants((node, pos) => {
-							node.marks.map((mark, i) => {
-								const before = document.createElement('span');
-								before.appendChild(document.createTextNode(styling[mark.type.name]));
-								const after = document.createElement('span');
+							if (node.type.name === 'paragraph' || node.type.name === 'heading') {
+								const tail = document.createElement('span');
+								const decs = new Set<string>();
+								node.descendants((child, childPos) => {
+									tail.classList.add(
+										'absolute',
+										// Magic number
+										// TODO: idk
+										// '-right-24',
+										'-right-24',
+										'w-24',
+										'flex',
+										'justify-start'
+									);
 
-								after.appendChild(document.createTextNode(styling[mark.type.name]));
-								const beforeDec = Decoration.widget(pos - i, before, {
+									child.marks.map((mark, i) => {
+										decs.add(styling[mark.type.name]);
+									});
+								});
+
+								decs.forEach((dec) => tail.appendChild(document.createTextNode(dec)));
+								const tailDec = Decoration.widget(pos, tail, {
 									side: -1,
 									marks: node.marks
 								});
-								const afterDec = Decoration.widget(pos + node.nodeSize + i, after, {
-									side: -1,
-									marks: node.marks
-								});
-								decorations.push(beforeDec, afterDec);
-							});
-
-							return true;
+								decorations.push(tailDec);
+							}
+							return node.type.name === 'paragraph' || node.type.name === 'heading';
 						});
 
 						return DecorationSet.create(doc, decorations);
