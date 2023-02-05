@@ -1,13 +1,21 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+	darkMode: 'class',
 	content: ['./src/**/*.{html,js,svelte,ts}'],
+	plugins: [
+		plugin(function ({ addVariant }) {
+			addVariant('light', '.light &');
+		})
+	],
 	theme: {
 		extend: {
 			colors: {
-				viewport: '#fcfcfc',
-				editor: '#f7f7f7',
-				pianoblack: '#191a1a',
-				border: '#dbdbdb'
+				border: 'rgb(var(--border) / <alpha-value>)',
+				editor: 'rgb(var(--editor) / <alpha-value>)',
+				viewport: 'rgb(var(--viewport) / <alpha-value>)',
+				text: 'rgb(var(--text) / <alpha-value>)'
 			},
 			fontFamily: {
 				merriweather: ['Merriweather', 'serif'],
@@ -15,5 +23,5 @@ module.exports = {
 			}
 		}
 	},
-	plugins: []
+	plugins: [require('@tailwindcss/forms')]
 };

@@ -40,7 +40,7 @@ export const MarkdownStyling = Extension.create({
 									});
 								});
 
-								decs.forEach((dec) => tail.appendChild(document.createTextNode(dec)));
+								[...decs].sort().forEach((dec) => tail.appendChild(document.createTextNode(dec)));
 								const tailDec = Decoration.widget(pos, tail, {
 									side: -1,
 									marks: node.marks

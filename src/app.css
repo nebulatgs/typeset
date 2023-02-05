@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-	@apply text-pianoblack;
+@layer colors {
+	:root {
+		--doctor: 252 252 252;
+		--french: 247 247 247;
+		--piano: 25 26 26;
+		--salt: 219 219 219;
+		--capri: 90 193 249;
+		--iron: 204 204 205;
+		--sleep: 16 16 16;
+
+		--chocolate: 61 44 18;
+		--caribou: 129 107 96;
+		--cloud: 252 245 237;
+		--sugar: 252 241 226;
+
+		--black: 0 0 0;
+		--white: 255 255 255;
+	}
+
+	.theme-light {
+		--border: var(--salt);
+		--editor: var(--french);
+		--viewport: var(--doctor);
+		--text: var(--chocolate);
+	}
+
+	.theme-sepia {
+		--border: var(--caribou);
+		--editor: var(--sugar);
+		--viewport: var(--cloud);
+		--text: var(--chocolate);
+	}
+
+	.theme-dark {
+		--border: var(--black);
+		--editor: var(--piano);
+		--viewport: var(--sleep);
+		--text: var(--iron);
+	}
+}
+
+@layer transition {
+	.ProseMirror,
+	.rendered,
+	.popover,
+	select {
+		@apply transition-colors;
+		transition-duration: 300ms;
+	}
+
+	div {
+		transition-property: background-color, border-color;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 300ms;
+	}
 }
