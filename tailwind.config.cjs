@@ -12,8 +12,8 @@ module.exports = {
 				text: 'rgb(var(--text) / <alpha-value>)'
 			},
 			fontFamily: {
-				merriweather: ['Merriweather', ...defaultTheme.fonts.serif],
-				notoserif: ['Noto Serif', ...defaultTheme.fonts.serif]
+				merriweather: ['Merriweather', ...defaultTheme.fontFamily.serif],
+				notoserif: ['Noto Serif', ...defaultTheme.fontFamily.serif]
 			}
 		}
 	},
