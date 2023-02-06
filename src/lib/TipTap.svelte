@@ -4,6 +4,8 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { MarkdownHeading } from './extensions/MarkdownHeading';
 	import { MarkdownStyling } from './extensions/MarkdownStyling';
+	import { Wrap } from './extensions/Wrap';
+	// import { Wrap } from './extensions/Wrap';
 
 	let element: HTMLDivElement;
 	let editor: Editor;
@@ -12,7 +14,7 @@
 	onMount(() => {
 		editor = new Editor({
 			element: element,
-			extensions: [StarterKit, MarkdownHeading, MarkdownStyling],
+			extensions: [StarterKit, MarkdownHeading, MarkdownStyling, Wrap],
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
 				editor = editor;
@@ -29,7 +31,7 @@
 	});
 </script>
 
-<div bind:this={element} class="w-full h-full px-24 py-10 relative" />
+<div class="w-full h-full px-24 py-10 relative" bind:this={element} />
 
 <style>
 	:global(.HeadingMeta) {

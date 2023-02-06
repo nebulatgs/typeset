@@ -38,3 +38,4 @@ function cookieWritable<T>(key: string, initial: T): Writable<T> {
 }
 
 export const theme = savedWritable('theme', '');
+export const focusMode = savedWritable('focusMode', false);

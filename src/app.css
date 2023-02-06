@@ -42,14 +42,65 @@
 		--text: var(--iron);
 	}
 }
+.focus-mode-final * {
+	background-color: rgb(var(--text) / 0.2);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	caret-color: rgb(var(--text));
+}
+
+/* .ProseMirror {
+	transition-property: padding-top;
+	@apply duration-300;
+	color: rgb(var(--text));
+} */
+
+.ProseMirror *:not(div) {
+	transition-property: transform;
+	@apply duration-300;
+}
+
+.focus-mode-final .ProseMirror {
+	@apply flex flex-col justify-end;
+	/* padding-bottom: calc(50vh - 1.5em); */
+}
+
+.focus-mode-final > * > * > *:not(div) {
+	transform: translateY(calc(-50vh + 2.5rem));
+}
+
+.focus-mode > * > * > *:not(div) {
+	transform: translateY(calc(50vh - 100% - 2.5rem));
+}
+
+.transition-only-transform * {
+	transition-property: transform !important;
+}
+
+.no-transition * {
+	transition: none !important;
+}
+
+.focus-mode-final :last-child {
+	background: linear-gradient(to bottom, rgb(var(--text)) 0%, rgb(var(--text)) 100%);
+	background-color: rgb(var(--text) / 0.2);
+	background-size: 1.5em 1.5em;
+	background-position: bottom left;
+	background-repeat: repeat-x;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	caret-color: rgb(var(--text));
+	/* @apply mb-[50%]; */
+}
 
 @layer transition {
 	.ProseMirror,
 	.rendered,
 	.popover,
 	select {
-		@apply transition-colors;
-		transition-duration: 300ms;
+		@apply transition-colors duration-300;
 	}
 
 	div {

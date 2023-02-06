@@ -1,10 +1,45 @@
-<script>
+<script lang="ts">
 	import Cog from '$lib/Cog.svelte';
-	import { theme } from '$lib/stores';
+	import { focusMode, theme } from '$lib/stores';
 	import { fly } from 'svelte/transition';
 	import TipTap from '../lib/TipTap.svelte';
 	let html = '';
 	let popover = false;
+	let editor: HTMLDivElement;
+
+	$: if ($focusMode && editor) {
+		editor.classList.add('transition-only-transform');
+		editor.offsetHeight;
+		editor.classList.add('focus-mode');
+		editor.offsetHeight;
+		setTimeout(() => {
+			editor.classList.add('no-transition');
+			editor.classList.add('no-transition');
+			editor.offsetHeight;
+			editor.classList.remove('focus-mode');
+			editor.offsetHeight;
+			editor.classList.add('focus-mode-final');
+			editor.offsetHeight;
+			editor.classList.remove('transition-only-transform');
+			editor.classList.remove('no-transition');
+		}, 300);
+	}
+	$: if (!$focusMode && editor) {
+		editor.classList.add('no-transition');
+		editor.classList.add('transition-only-transform');
+		editor.offsetHeight;
+		editor.classList.remove('focus-mode-final');
+		editor.offsetHeight;
+		editor.classList.add('focus-mode');
+		editor.offsetHeight;
+		editor.classList.remove('no-transition');
+		editor.offsetHeight;
+		editor.classList.remove('focus-mode');
+		editor.offsetHeight;
+		setTimeout(() => {
+			editor.classList.remove('transition-only-transform');
+		}, 300);
+	}
 </script>
 
 <svelte:window
@@ -17,7 +52,7 @@
 />
 
 <div class="flex h-screen w-full theme-{$theme} text-text">
-	<div class="bg-editor w-1/2 border-r-border border-r">
+	<div class="bg-editor w-1/2 border-r-border border-r no-transition" bind:this={editor}>
 		<TipTap bind:html />
 	</div>
 	<div class="bg-viewport grid place-items-center w-1/2 py-10 px-20">
@@ -47,6 +82,7 @@
 							<option value="sepia">Sepia</option>
 							<option value="dark">Dark</option>
 						</select>
+						<input type="checkbox" bind:checked={$focusMode} /> Focus Mode
 					</div>
 				</div>
 			</div>
