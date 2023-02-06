@@ -18,19 +18,24 @@
 />
 
 <div
-	class="flex h-screen w-full theme-{$theme} text-text spacing-{$spacing}"
+	class="print:block flex h-screen w-full theme-{$theme} text-text spacing-{$spacing}"
 	class:indent={$indent}
 	class:center-headings={$centerHeadings}
 >
-	<div class="bg-editor w-1/2 border-r-border border-r overflow-auto" bind:this={editor}>
+	<div
+		class="bg-editor w-1/2 border-r-border border-r overflow-auto print:hidden"
+		bind:this={editor}
+	>
 		<TipTap bind:html />
 	</div>
-	<div class="bg-viewport grid place-items-center w-1/2 py-10 px-20 overflow-auto">
-		<div class="rendered w-full h-full ">
+	<div
+		class="bg-viewport grid place-items-center w-1/2 print:w-full py-10 px-20 print:p-0 overflow-auto"
+	>
+		<div class="rendered w-full h-full print:overflow-scroll">
 			{@html html}
 		</div>
 	</div>
-	<div class="popover absolute flex flex-col gap-2 items-end right-0 p-5">
+	<div class="popover absolute flex flex-col gap-2 items-end right-0 p-5 print:hidden">
 		<button on:click|stopPropagation={() => (popover = !popover)}>
 			<Cog />
 		</button>
