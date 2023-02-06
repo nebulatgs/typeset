@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -10,8 +12,8 @@ module.exports = {
 				text: 'rgb(var(--text) / <alpha-value>)'
 			},
 			fontFamily: {
-				merriweather: ['Merriweather', 'serif'],
-				notoserif: ['Noto Serif', 'sans-serif']
+				merriweather: ['Merriweather', ...defaultTheme.fonts.serif],
+				notoserif: ['Noto Serif', ...defaultTheme.fonts.serif]
 			}
 		}
 	},
