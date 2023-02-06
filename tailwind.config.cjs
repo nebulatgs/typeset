@@ -1,14 +1,6 @@
-const plugin = require('tailwindcss/plugin');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	darkMode: 'class',
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-	plugins: [
-		plugin(function ({ addVariant }) {
-			addVariant('light', '.light &');
-		})
-	],
 	theme: {
 		extend: {
 			colors: {
