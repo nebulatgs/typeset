@@ -2,36 +2,49 @@
 	@apply text-xl;
 	@apply mb-10;
 	@apply font-merriweather font-black;
-	@apply text-center;
 }
 
 .rendered h2 {
 	@apply text-lg;
 	@apply mb-5;
 	@apply font-merriweather font-black;
-	@apply text-center;
 }
 .rendered h3 {
 	@apply mb-3;
 	@apply font-merriweather font-black;
-	@apply text-center;
 }
 .rendered h4 {
 	@apply mb-3;
 	@apply font-merriweather font-black italic;
-	@apply text-center;
 }
 .rendered h5 {
 	@apply mb-3;
 	@apply font-merriweather italic;
-	@apply text-center;
 }
 .rendered h6 {
 	@apply mb-3;
 	@apply font-merriweather font-black;
 }
 .rendered p {
-	@apply indent-12;
 	@apply mb-3;
 	@apply font-notoserif;
+}
+
+.center-headings .rendered h1,
+.center-headings .rendered h2,
+.center-headings .rendered h3,
+.center-headings .rendered h4,
+.center-headings .rendered h5 {
+	@apply text-center;
+}
+.indent .rendered p {
+	@apply indent-12;
+}
+
+.spacing-single .rendered p {
+	line-height: 1;
+}
+
+.spacing-double .rendered p {
+	line-height: 2;
 }

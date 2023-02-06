@@ -1,0 +1,11 @@
+.checkbox {
+	@apply text-transparent bg-transparent border-transparent 
+	ring-1 ring-text 
+	focus:ring-text focus:ring-1
+	focus:ring-offset-transparent focus:ring-offset-0 
+	focus:border-transparent;
+}
+
+[type='checkbox']:checked {
+	background-image: var(--checkbox);
+}

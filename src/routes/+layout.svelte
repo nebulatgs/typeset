@@ -1,6 +1,7 @@
 <script>
 	import '../app.css';
 	import '../prose.css';
+	import '../util.css';
 </script>
 
 <svelte:head>

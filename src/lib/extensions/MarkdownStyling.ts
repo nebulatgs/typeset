@@ -31,6 +31,7 @@ export const MarkdownStyling = Extension.create({
 										// '-right-24',
 										'-right-24',
 										'w-24',
+										'h-48',
 										'flex',
 										'justify-start'
 									);

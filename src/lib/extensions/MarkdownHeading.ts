@@ -21,6 +21,7 @@ export const MarkdownHeading = Extension.create({
 									// TODO: idk
 									'-left-24',
 									'w-24',
+									'h-48',
 									'flex',
 									'justify-end',
 									'px-2'

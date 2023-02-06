@@ -4,17 +4,51 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { MarkdownHeading } from './extensions/MarkdownHeading';
 	import { MarkdownStyling } from './extensions/MarkdownStyling';
-	import { Wrap } from './extensions/Wrap';
+	import { focusMode } from './stores';
 	// import { Wrap } from './extensions/Wrap';
 
 	let element: HTMLDivElement;
+	let editorElement: HTMLDivElement;
 	let editor: Editor;
 	export let html = '';
 
+	$: if ($focusMode && element) {
+		element.classList.add('transition-only-transform');
+		element.offsetHeight;
+		element.classList.add('focus-mode');
+		element.offsetHeight;
+		setTimeout(() => {
+			element.classList.add('no-transition');
+			element.offsetHeight;
+			element.classList.remove('focus-mode');
+			element.offsetHeight;
+			element.classList.add('focus-mode-final');
+			element.offsetHeight;
+			element.classList.remove('transition-only-transform');
+			element.classList.remove('no-transition');
+		}, 300);
+	}
+	$: if (!$focusMode && element) {
+		element.classList.add('no-transition');
+		element.classList.add('transition-only-transform');
+		element.offsetHeight;
+		element.classList.remove('focus-mode-final');
+		element.offsetHeight;
+		element.classList.add('focus-mode');
+		element.offsetHeight;
+		element.classList.remove('no-transition');
+		element.offsetHeight;
+		element.classList.remove('focus-mode');
+		element.offsetHeight;
+		setTimeout(() => {
+			element.classList.remove('transition-only-transform');
+		}, 300);
+	}
+
 	onMount(() => {
 		editor = new Editor({
-			element: element,
-			extensions: [StarterKit, MarkdownHeading, MarkdownStyling, Wrap],
+			element: editorElement,
+			extensions: [StarterKit, MarkdownHeading, MarkdownStyling],
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
 				editor = editor;
@@ -31,7 +65,11 @@
 	});
 </script>
 
-<div class="w-full h-full px-24 py-10 relative" bind:this={element} />
+<div class="h-full w-full cursor-text" on:click={() => editor.commands.focus()}>
+	<div class="h-full w-full" bind:this={element}>
+		<div class="w-full px-24 py-10 relative" bind:this={editorElement} />
+	</div>
+</div>
 
 <style>
 	:global(.HeadingMeta) {
